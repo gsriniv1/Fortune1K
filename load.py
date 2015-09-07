@@ -1,8 +1,19 @@
 __author__ = 'gsriniv1'
 import Company
+import csv
 
-c1 = Company.Company('General Electric')
-c2 = Company.Company('Johnson & Johnson')
+F1KFILE="fortune1000-2014.csv"
 
-print(c1)
-print(c2)
+csvfile = csv.DictReader(open(F1KFILE))
+cs=Company.Companies()
+for row in csvfile:
+    try:
+        nm=row.get('NAME')
+        print("Company " , nm)
+        c=Company.Company(nm)
+        c.setProperties(row.get('WEBSITE') , street=row.get('STREETADD'),place=row.get("PLACE"),zip=row.get("ZIP"),state=row.get("STATE"))
+        cs.addCompany(c)
+    except:
+        pass
+
+cs.show()
