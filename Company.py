@@ -1,4 +1,5 @@
 __author__ = 'gsriniv1'
+import string
 class Company:
     def __init__(self,nm):
         self._name = nm
@@ -25,6 +26,13 @@ class Company:
     def getName(self):
         return self._name
 
+    def sameAs(self,nm):
+        if nm in self._name:
+            return True
+        if self._name in nm:
+            return True
+        return False
+
 class Companies:
     def __init__(self):
         self._all = []
@@ -34,8 +42,17 @@ class Companies:
         self._all.append(c)
         self._lookup[c.getName()] = c
 
+    def searchCompany(self,nm):
+        for c in self._all:
+            if c.sameAs(nm) == True:
+                return c
+        return None
+
     def lookupCompany(self,nm):
-        return self._lookup[nm]
+        try:
+            return self._lookup[nm]
+        except:
+            return self.searchCompany(nm)
 
     def show(self):
         print("Total number of companies: ",len(self._all))
