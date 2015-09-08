@@ -1,4 +1,4 @@
-__author__ = 'gsriniv1'
+__author__ = 'gsriniv1 and RajaSrinivasan'
 import Company
 import csv
 
@@ -20,15 +20,16 @@ for row in csvfile:
 print("Now loading Ticker symbol file")
 tickerfile=csv.DictReader(open(TICKERSYMFILE))
 for row in tickerfile:
-    try:
-        tickersym=row.get("Symbol")
-        # print(tickersym)
-        tickercompany=row.get("Name")
-        print(tickercompany)
-        c=cs.lookupCompany(tickercompany)
+    tickersym=row.get("Symbol")
+    # print(tickersym)
+    tickercompany=row.get("Name")
+    print(tickercompany)
+    c=cs.lookupCompany(tickercompany)
+    if c == None:
+        print(tickercompany , "could not be found")
+    else:
         c.setTicker(tickersym)
         # c.show()
-    except:
-        pass
 
-cs.show()
+
+#cs.show()
